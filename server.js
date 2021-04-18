@@ -7,6 +7,7 @@ const expressLayout=require('express-ejs-layouts')
 const mongoose = require('mongoose')
 const session=require('express-session')
 const flash = require('express-flash')
+const MongoDBStore = require('connect-mongodb-session')(session);
 
 
 const PORT = process.env.PORT || 3000
@@ -20,13 +21,24 @@ connection.once('open',()=>{
 }).catch(err=>{
     console.log('Db connection failed...')
 })
+//mongo session store
+var store = new MongoDBStore({
+    uri:'mongodb://localhost/pizza',
+    collection: 'sessions'
+})
+
+
+
 //Session config
 app.use(session({
     secret: process.env.COOKIE_SECRET,
     resave:false,
+    store:store,
     saveUninitialized:false,
     cookie:{maxAge:1000*60*60*24} //24 hours
 }))
+
+
 app.use(flash())
 
 //Assets
