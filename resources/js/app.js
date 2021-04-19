@@ -1,6 +1,5 @@
 import axios from 'axios'
 import Noty from 'noty'
-
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCount = document.querySelector('#cartCounter')
 
