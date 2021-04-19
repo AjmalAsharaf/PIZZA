@@ -12,9 +12,16 @@ function updateCart(pizza){
             type:'success',
             timeout:1000,
             progressBar:false,
-            text: "Notification text"
+            text: "Item added to cart"
           }).show();
           
+    }).catch(err=>{
+        new Noty({
+            type:'error',
+            timeout:1000,
+            progressBar:false,
+            text: "Something went wrong"
+          }).show();
     })
 }
 

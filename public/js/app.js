@@ -1858,7 +1858,14 @@ function updateCart(pizza) {
       type: 'success',
       timeout: 1000,
       progressBar: false,
-      text: "Notification text"
+      text: "Item added to cart"
+    }).show();
+  })["catch"](function (err) {
+    new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
+      type: 'error',
+      timeout: 1000,
+      progressBar: false,
+      text: "Something went wrong"
     }).show();
   });
 }
