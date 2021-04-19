@@ -1,5 +1,10 @@
 import axios from 'axios'
 import Noty from 'noty'
+import moment from 'moment'
+import initAdmin from './admin'
+
+
+
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCount = document.querySelector('#cartCounter')
 
@@ -33,3 +38,15 @@ addToCart.forEach((btn)=>{
         updateCart(pizza)
     })
 })
+
+//Rovme alert message after 2 seconds
+
+const alertMsg = document.querySelector('#success-alert')
+
+if(alertMsg){
+    setTimeout(()=>{
+        alertMsg.remove()
+    },2000)
+}
+
+initAdmin()
