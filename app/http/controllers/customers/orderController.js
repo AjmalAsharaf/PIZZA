@@ -4,7 +4,7 @@ function orderController(){
     return{
         store(req,res){
             const {phone,address} =req.body
-            console.log(req.body)
+            
             if(!phone || !address){
                 req.flash('error','All fields are required')
                 return res.redirect('/cart')
@@ -33,8 +33,18 @@ function orderController(){
                 {sort:{'createdAt':-1}})
                 res.header('Cache-Control','no-cache, private, no-store, must-revalidate, max-stale=0, post-check=0, pre-check=0')
             res.render('customers/orders',{orders:orders,moment:moment})
-            console.log(orders)
+            
         },
+        async show(req,res){
+            const order = await Order.findById(req.params.id)
+            //Authorize user
+            if(req.user._id.toString() === order.customerId.toString()){
+                return res.render('customers/singleOrder',{order:order})
+            }
+            return res.redirect('/')
+            
+
+        }
     }
 }
 module.exports=orderController
